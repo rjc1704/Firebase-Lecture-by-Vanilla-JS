@@ -1,0 +1,92 @@
+* {
+  font-family: "Noto Serif KR", serif;
+}
+
+.mypic {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("아티스트 사진URL");
+  background-position: center 30%;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mypost {
+  width: 95%;
+  max-width: 500px;
+  margin: 20px auto 20px auto;
+
+  box-shadow: 0px 0px 3px 0px black;
+  padding: 20px;
+}
+
+.mypost > button {
+  margin-top: 15px;
+}
+
+.mycards {
+  width: 95%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.mycards > .card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#authPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authInput {
+  margin-bottom: 10px;
+}
+
+.authInput > div {
+  width: 40px;
+  font-size: large;
+}
+
+.authInput > input {
+  width: 100%;
+}
+
+.socialBtns {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#profileMngr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#profileMngr > button {
+  background-color: white;
+  font-size: medium;
+  padding: 5px 10px;
+}
+
+#profileMngr > button:hover {
+  background-color: black;
+  color: white;
+}

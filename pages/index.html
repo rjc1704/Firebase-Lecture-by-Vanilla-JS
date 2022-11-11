@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>로그인페이지</title>
-</head>
-
-<body>
-    <h1>로그인 페이지</h1>
-    <p>ID: <input type="text" /></p>
-    <p>PW: <input type="text" /></p>
-    <button onclick="handleLogin()">로그인하기</button>
-    <script>
-        const handleLogin = () => {
-            window.history.pushState({}, "", "#fanLog")
-        }
-    </script>
-</body>
-
-</html>
+<div id="authPage">
+    <div>
+        <h1>로그인 페이지</h1>
+        <div class="authInput">
+            <div>ID:</div> <input type="text" />
+        </div>
+        <div class="authInput">
+            <div>PW:</div> <input type="text" />
+        </div>
+        <button class="loginBtn" onclick="handleLogin()">로그인</button><br />
+        <button class="regBtn">회원가입하기</button><br />
+        <section class="socialBtns">
+            <button>Google Login</button>
+            <button>Github Login</button>
+        </section>
+    </div>
+</div>
