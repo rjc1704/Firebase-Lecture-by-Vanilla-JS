@@ -1,49 +1,29 @@
 <div>
     <div class="mypic">
-        <h1>아티스트이름 팬명록</h1>
-        <p>현재기온: <span id="temp">36</span>도</p>
+        <h1>조이현 팬명록</h1>
         <div id="profileMngr">
             <button onclick="goToProfile()">프로필 관리</button>
+            <button onclick="logout()">로그아웃</button>
         </div>
     </div>
 
     <div class="mypost">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="name" placeholder="url">
-            <label for="floatingInput">닉네임</label>
+            <img id="profileImg" width="50px" height="50px" src="/assets/blankProfile.webp" />
+            <span id="nickname">닉네임</span>
         </div>
         <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="comment"
                 style="height: 100px"></textarea>
             <label for="floatingTextarea2">응원댓글</label>
         </div>
-        <button onclick="save_comment()" type="button" class="btn btn-dark">응원 남기기</button>
-        <a href="test.html">test이동</a>
+
+        <button onclick="save_comment(event)" type="button" class="btn btn-dark">응원 남기기</button>
+
+
     </div>
-    <div class="mycards" id="comment-list">
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>새로운 앨범 너무 멋져요!</p>
-                    <footer class="blockquote-footer">호빵맨</footer>
-                </blockquote>
-            </div>
-        </div>
+    <div id="comment-list">
+
+
     </div>
 </div>

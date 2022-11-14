@@ -11,8 +11,8 @@
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url("아티스트 사진URL");
-  background-position: center 30%;
+    url("/assets/choyihyun.webp");
+  background-position: center 19%;
   background-size: cover;
 
   color: white;
@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding-top: 100px;
 }
 
 .mypost {
@@ -118,4 +118,68 @@
 }
 #authTitle {
   text-align: center;
+}
+
+#profileImg {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#profilePage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profileWrapper {
+  width: auto;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+}
+#profileWrapper > h2 {
+  text-align: center;
+}
+
+#profileView {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#profileForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+#imgInput {
+  display: none;
+}
+
+#imgLabel {
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+#postBtnWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.updateBtns {
+  display: flex;
+  justify-content: end;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.noDisplay {
+  display: none;
 }
