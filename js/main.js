@@ -2,7 +2,7 @@
 import { handleAuth, onToggle, logout } from "./auth.js";
 import { changeProfile, onFileChange } from "./profile.js";
 import { handleLocation, goToProfile } from "./router.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { authService } from "./firebase.js";
 import { socialLogin } from "./auth.js";
 import {
   save_comment,
@@ -16,9 +16,8 @@ window.addEventListener("hashchange", handleLocation);
 
 // 첫 랜딩 또는 새로고침 시 handleLocation 실행하여 화면 변경
 document.addEventListener("DOMContentLoaded", function () {
-  const auth = getAuth();
   // Firebase 연결상태를 감시
-  auth.onAuthStateChanged((user) => {
+  authService.onAuthStateChanged((user) => {
     // Firebase 연결되면 화면 표시
     handleLocation();
     const hash = window.location.hash;
