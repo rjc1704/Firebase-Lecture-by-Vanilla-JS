@@ -1,6 +1,5 @@
 import { authService } from "./firebase.js";
 
-//TODO: path가 "" 또는 "/"인 경우 로그인 상태 체크해서 로그인상태면 fanLog 화면으로 아니면 로그인화면으로
 const routes = {
   404: "/pages/404.html",
   "/": "/pages/auth.html",
