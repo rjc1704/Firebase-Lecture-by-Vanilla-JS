@@ -183,3 +183,21 @@
 .noDisplay {
   display: none;
 }
+.updateBtn {
+  min-width: 70px;
+}
+.newCmtInput {
+  width: 100%;
+}
+.cmtImg {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.quote-footer {
+  margin-top: 20px;
+  color: #6c757d;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

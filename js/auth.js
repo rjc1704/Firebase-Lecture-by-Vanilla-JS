@@ -38,10 +38,8 @@ export const handleAuth = (event) => {
   }
 
   const matchedEmail = emailVal.match(emailRegex);
-  console.log("matchedEmail:", matchedEmail);
 
   const matchedPw = pwVal.match(pwRegex);
-  console.log("matchedPw:", matchedPw);
 
   if (matchedEmail === null) {
     alert("이메일 형식에 맞게 입력해 주세요");
@@ -61,8 +59,6 @@ export const handleAuth = (event) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log("user in signin:", user);
-        // ...
         window.location.hash = "#fanLog";
       })
       .catch((error) => {
@@ -118,24 +114,14 @@ export const socialLogin = (event) => {
   }
   signInWithPopup(getAuth(), provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      //   const credential = GoogleAuthProvider.credentialFromResult(result);
-      //   const token = credential.accessToken;
-      // The signed-in user info.
       console.log("result:", result);
       const user = result.user;
-      // ...
     })
     .catch((error) => {
       // Handle Errors here.
       console.log("error:", error);
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
     });
 };
 
@@ -144,6 +130,7 @@ export const logout = () => {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
+      localStorage.clear();
       console.log("로그아웃 성공");
     })
     .catch((error) => {

@@ -42,7 +42,6 @@ export const handleLocation = async () => {
   if (path === "fanLog") {
     // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
     const nickname = localStorage.getItem("nickname");
-    console.log("nickname:", nickname);
     document.getElementById("nickname").textContent =
       nickname === "null" ? "닉네임 없음" : nickname;
 
@@ -63,7 +62,6 @@ export const handleLocation = async () => {
           id: doc.id,
           ...doc.data(),
         };
-        console.log("commentObj:", commentObj);
         cmtObjList.push(commentObj);
       });
       const commnetList = document.getElementById("comment-list");
@@ -73,14 +71,23 @@ export const handleLocation = async () => {
         const temp_html = `<div class="card commentCard">
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <p>${cmtObj.text}</p>
-                    <footer class="blockquote-footer">${
-                      cmtObj.nickname
-                    }</footer>
+                    <p class="commentText">${cmtObj.text}</p>
+                    <p id="${
+                      cmtObj.id
+                    }" class="noDisplay"><input class="newCmtInput" type="text" maxlength="30" /><button class="updateBtn" onclick="update_comment(event)">완료</button></p>
+                    <footer class="quote-footer"><div>BY&nbsp;&nbsp;<img class="cmtImg" width="50px" height="50px" src="${
+                      cmtObj.profileImg
+                    }" alt="profileImg" /><span>${
+          cmtObj.nickname ?? "닉네임 없음"
+        }</span></div><div class="cmtAt">${new Date(cmtObj.createdAt)
+          .toString()
+          .slice(0, 25)}</div></footer>
                 </blockquote>
                 <div class="${isOwner ? "updateBtns" : "noDisplay"}">
-                     <button class="btn btn-dark">수정</button>
-                  <button class="btn btn-dark">삭제</button>
+                     <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
+                  <button name="${
+                    cmtObj.id
+                  }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
                 </div>            
               </div>
        </div>`;
@@ -95,14 +102,10 @@ export const handleLocation = async () => {
   }
   if (path === "profile") {
     // 프로필 관리 화면 일 때 현재 프로필 사진과 닉네임 할당
-    document.getElementById("profileView").src =
-      localStorage.getItem("profileUrl");
+    document.getElementById("profileView").src = getAuth().currentUser.photoURL;
     document.getElementById("profileNickname").placeholder =
       localStorage.getItem("nickname");
   }
-
-  // const btnText = document.querySelector(".loginBtn").textContent;
-  // console.log("btnText:", btnText);
 };
 
 export const goToProfile = () => {

@@ -10,7 +10,12 @@ import {
 import { route, handleLocation, goToProfile } from "./router.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { socialLogin } from "./auth.js";
-import { save_comment } from "./fanLog.js";
+import {
+  save_comment,
+  update_comment,
+  onEditing,
+  delete_comment,
+} from "./fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
 window.addEventListener("hashchange", handleLocation);
@@ -21,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Firebase 연결상태를 감시
   auth.onAuthStateChanged((user) => {
     // Firebase 연결되면 화면 표시
-    // console.log("user:", user);
     handleLocation();
     const hash = window.location.hash;
     if (user) {
@@ -49,3 +53,6 @@ window.logout = logout;
 window.onFileChange = onFileChange;
 window.changeProfile = changeProfile;
 window.save_comment = save_comment;
+window.update_comment = update_comment;
+window.onEditing = onEditing;
+window.delete_comment = delete_comment;

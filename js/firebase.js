@@ -2,8 +2,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  ref,
+  uploadString,
+  getDownloadURL,
+  getStorage,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,6 +23,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const dbService = getFirestore(app);
 export const authService = getAuth();
+export const storageService = getStorage(app);
 // -------------------------------------------------------------
 // 기존 jQuery API 모음
 // $(document).ready(function () {
