@@ -1,23 +1,14 @@
 import { emailRegex, pwRegex } from "./util.js";
+import { authService } from "./firebase.js";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   GithubAuthProvider,
   signOut,
-  updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
-import { app } from "./firebase.js";
-import {
-  ref,
-  uploadString,
-  getDownloadURL,
-  getStorage,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 // 로그인 성공 시 팬명록 화면으로 이동
 export const handleAuth = (event) => {
   event.preventDefault();
@@ -26,6 +17,7 @@ export const handleAuth = (event) => {
   const pw = document.getElementById("pw");
   const pwVal = pw.value;
 
+  // 유효성 검사 진행
   if (!emailVal) {
     alert("이메일을 입력해 주세요");
     email.focus();
@@ -38,7 +30,6 @@ export const handleAuth = (event) => {
   }
 
   const matchedEmail = emailVal.match(emailRegex);
-
   const matchedPw = pwVal.match(pwRegex);
 
   if (matchedEmail === null) {
@@ -51,11 +42,13 @@ export const handleAuth = (event) => {
     pw.focus();
     return;
   }
+
+  // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
   const authBtnText = document.querySelector("#authBtn").value;
   if (authBtnText === "로그인") {
     // 유효성검사 후 로그인 성공 시 팬명록 화면으로
 
-    signInWithEmailAndPassword(getAuth(), emailVal, pwVal)
+    signInWithEmailAndPassword(authService, emailVal, pwVal)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -73,7 +66,7 @@ export const handleAuth = (event) => {
       });
   } else {
     // 회원가입 버튼 클릭의 경우
-    createUserWithEmailAndPassword(getAuth(), emailVal, pwVal)
+    createUserWithEmailAndPassword(authService, emailVal, pwVal)
       .then((userCredential) => {
         // Signed in
         console.log("회원가입 성공!");
@@ -89,6 +82,7 @@ export const handleAuth = (event) => {
   }
 };
 
+// 로그인, 회원가입 화면 토글링 기능
 export const onToggle = () => {
   const authBtn = document.querySelector("#authBtn");
   const authToggle = document.querySelector("#authToggle");
@@ -112,7 +106,7 @@ export const socialLogin = (event) => {
   } else if (name === "github") {
     provider = new GithubAuthProvider();
   }
-  signInWithPopup(getAuth(), provider)
+  signInWithPopup(authService, provider)
     .then((result) => {
       console.log("result:", result);
       const user = result.user;
@@ -126,8 +120,7 @@ export const socialLogin = (event) => {
 };
 
 export const logout = () => {
-  const auth = getAuth();
-  signOut(auth)
+  signOut(authService)
     .then(() => {
       // Sign-out successful.
       localStorage.clear();
@@ -137,46 +130,4 @@ export const logout = () => {
       // An error happened.
       console.log("error:", error);
     });
-};
-
-export const changeProfile = async (event) => {
-  event.preventDefault();
-  document.getElementById("profileBtn").disabled = true;
-  const auth = getAuth();
-  const imgRef = ref(getStorage(app), `${auth.currentUser.uid}/${uuidv4()}`);
-
-  // TODO: 닉네임 또는 프로필이미지에 변경 사항이 있을 경우 프로필 변경 API 요청
-  const newNickname = document.getElementById("profileNickname").value;
-  // 프로필 이미지 dataUrl을 Storage에 업로드 후 다운로드 링크를 받아서 photoURL에 저장.
-  const imgDataUrl = localStorage.getItem("imgDataUrl");
-  let downloadUrl;
-  if (imgDataUrl) {
-    const response = await uploadString(imgRef, imgDataUrl, "data_url");
-    downloadUrl = await getDownloadURL(response.ref);
-  }
-  await updateProfile(getAuth().currentUser, {
-    displayName: newNickname ? newNickname : null,
-    photoURL: downloadUrl ? downloadUrl : null,
-  })
-    .then(() => {
-      alert("프로필 수정 완료");
-      window.location.hash = "#fanLog";
-      window.location.reload();
-    })
-    .catch((error) => {
-      alert("프로필 수정 실패");
-      console.log("error:", error);
-    });
-};
-
-export const onFileChange = (event) => {
-  const theFile = event.target.files[0]; // file 객체
-  const reader = new FileReader();
-  reader.readAsDataURL(theFile); // file 객체를 브라우저가 읽을 수 있는 data URL로 읽음.
-  reader.onloadend = (finishedEvent) => {
-    // 파일리더가 파일객체를 data URL로 변환 작업을 끝났을 때
-    const imgDataUrl = finishedEvent.currentTarget.result;
-    localStorage.setItem("imgDataUrl", imgDataUrl);
-    document.getElementById("profileView").src = imgDataUrl;
-  };
 };

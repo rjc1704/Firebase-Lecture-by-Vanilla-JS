@@ -2,14 +2,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-import {
-  ref,
-  uploadString,
-  getDownloadURL,
-  getStorage,
-} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 
-// Your web app's Firebase configuration
+// 아래 데이터는 본인의 Firebase 프로젝트 설정에서 확인할 수 있습니다.
 const firebaseConfig = {
   apiKey: "AIzaSyBLC85NBtPaLOoWyBoSKwexacA6bC4qZX0",
   authDomain: "privatefanbook.firebaseapp.com",
@@ -24,40 +19,3 @@ export const app = initializeApp(firebaseConfig);
 export const dbService = getFirestore(app);
 export const authService = getAuth();
 export const storageService = getStorage(app);
-// -------------------------------------------------------------
-// 기존 jQuery API 모음
-// $(document).ready(function () {
-//   set_temp();
-//   show_comment();
-// });
-// function set_temp() {
-//   $.ajax({
-//     type: "GET",
-//     url: "http://spartacodingclub.shop/sparta_api/weather/seoul",
-//     data: {},
-//     success: function (response) {
-//       $("#temp").text(response["temp"]);
-//     },
-//   });
-// }
-// function save_comment() {
-//   $.ajax({
-//       type: 'POST',
-//       url: '/homework',
-//       data: { sample_give: '데이터전송' },
-//       success: function (response) {
-//           alert(response['msg'])
-//           window.location.reload()
-//       }
-//   })
-// }
-// function show_comment() {
-//   $.ajax({
-//     type: "GET",
-//     url: "/homework",
-//     data: {},
-//     success: function (response) {
-//       alert(response["msg"]);
-//     },
-//   });
-// }

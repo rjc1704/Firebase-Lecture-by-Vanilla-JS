@@ -1,13 +1,7 @@
 // SPA 라우팅 설정 ------------------------------------------
-import { app } from "./firebase.js";
-import {
-  handleAuth,
-  onToggle,
-  logout,
-  changeProfile,
-  onFileChange,
-} from "./auth.js";
-import { route, handleLocation, goToProfile } from "./router.js";
+import { handleAuth, onToggle, logout } from "./auth.js";
+import { changeProfile, onFileChange } from "./profile.js";
+import { handleLocation, goToProfile } from "./router.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { socialLogin } from "./auth.js";
 import {
