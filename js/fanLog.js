@@ -126,7 +126,6 @@ export const getCommentList = async () => {
     const div = document.createElement("div");
     div.classList.add("mycards");
     div.innerHTML = temp_html;
-    commnetList.insertAdjacentElement("beforeend", div);
-    // $("#comment-list").append(temp_html);
+    commnetList.appendChild(div);
   });
 };
