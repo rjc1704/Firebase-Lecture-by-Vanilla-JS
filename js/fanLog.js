@@ -22,9 +22,8 @@ export const save_comment = async (event) => {
       profileImg: photoURL,
       nickname: displayName,
     });
-    alert("Post 성공");
     comment.value = "";
-    window.location.reload();
+    getCommentList();
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
@@ -62,7 +61,7 @@ export const update_comment = async (event) => {
   const commentRef = doc(dbService, "comments", id);
   try {
     await updateDoc(commentRef, { text: newComment });
-    window.location.reload();
+    getCommentList();
   } catch (error) {
     alert(error);
   }
@@ -75,7 +74,7 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-      window.location.reload();
+      getCommentList();
     } catch (error) {
       alert(error);
     }
@@ -98,6 +97,7 @@ export const getCommentList = async () => {
   });
   const commnetList = document.getElementById("comment-list");
   const currentUid = authService.currentUser.uid;
+  commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
     const isOwner = currentUid === cmtObj.creatorId;
     const temp_html = `<div class="card commentCard">

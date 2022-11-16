@@ -23,16 +23,14 @@ export const handleLocation = async () => {
   const route = routes[path] || routes[404];
   const html = await fetch(route).then((data) => data.text());
   document.getElementById("root").innerHTML = html;
+
   if (path === "fanLog") {
     // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
-    const nickname = localStorage.getItem("nickname");
     document.getElementById("nickname").textContent =
-      nickname === "null" ? "닉네임 없음" : nickname;
+      authService.currentUser.displayName ?? "닉네임 없음";
 
-    const profileUrl = localStorage.getItem("profileUrl");
-    if (profileUrl !== "null") {
-      document.getElementById("profileImg").src = profileUrl;
-    }
+    document.getElementById("profileImg").src =
+      authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
     getCommentList();
   }
@@ -41,7 +39,7 @@ export const handleLocation = async () => {
     document.getElementById("profileView").src =
       authService.currentUser.photoURL;
     document.getElementById("profileNickname").placeholder =
-      localStorage.getItem("nickname");
+      authService.currentUser.displayName ?? "닉네임 없음";
   }
 };
 
