@@ -1,4 +1,3 @@
-// SPA 라우팅 설정 ------------------------------------------
 import { handleAuth, onToggle, logout } from "./pages/auth.js";
 import { changeProfile, onFileChange } from "./pages/profile.js";
 import { socialLogin } from "./pages/auth.js";
