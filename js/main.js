@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// onclick 이벤트 핸들러 리스트
 window.onToggle = onToggle;
 window.handleAuth = handleAuth;
 window.goToProfile = goToProfile;
