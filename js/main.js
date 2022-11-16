@@ -1,15 +1,15 @@
 // SPA 라우팅 설정 ------------------------------------------
-import { handleAuth, onToggle, logout } from "./auth.js";
-import { changeProfile, onFileChange } from "./profile.js";
+import { handleAuth, onToggle, logout } from "./pages/auth.js";
+import { changeProfile, onFileChange } from "./pages/profile.js";
+import { socialLogin } from "./pages/auth.js";
 import { handleLocation, goToProfile } from "./router.js";
 import { authService } from "./firebase.js";
-import { socialLogin } from "./auth.js";
 import {
   save_comment,
   update_comment,
   onEditing,
   delete_comment,
-} from "./fanLog.js";
+} from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
 window.addEventListener("hashchange", handleLocation);

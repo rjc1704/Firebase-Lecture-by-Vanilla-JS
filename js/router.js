@@ -6,7 +6,7 @@ const routes = {
   fanLog: "/pages/fanLog.html",
   profile: "/pages/profile.html",
 };
-import { getCommentList } from "./fanLog.js";
+import { getCommentList } from "./pages/fanLog.js";
 
 export const handleLocation = async () => {
   let path = window.location.hash.replace("#", "");

@@ -1,5 +1,5 @@
-import { emailRegex, pwRegex } from "./util.js";
-import { authService } from "./firebase.js";
+import { emailRegex, pwRegex } from "../util.js";
+import { authService } from "../firebase.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -108,7 +108,6 @@ export const socialLogin = (event) => {
   }
   signInWithPopup(authService, provider)
     .then((result) => {
-      console.log("result:", result);
       const user = result.user;
     })
     .catch((error) => {

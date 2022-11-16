@@ -1,4 +1,4 @@
-import { authService, storageService } from "./firebase.js";
+import { authService, storageService } from "../firebase.js";
 import {
   ref,
   uploadString,
