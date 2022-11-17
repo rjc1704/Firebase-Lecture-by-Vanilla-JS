@@ -38,7 +38,7 @@ export const handleLocation = async () => {
   if (path === "profile") {
     // 프로필 관리 화면 일 때 현재 프로필 사진과 닉네임 할당
     document.getElementById("profileView").src =
-      authService.currentUser.photoURL;
+      authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
     document.getElementById("profileNickname").placeholder =
       authService.currentUser.displayName ?? "닉네임 없음";
   }
