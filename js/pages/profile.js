@@ -1,4 +1,4 @@
-import { authService, storageService } from "../firebase.js";
+import { authService, dbService, storageService } from "../firebase.js";
 import {
   ref,
   uploadString,
@@ -6,6 +6,18 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
 import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+import {
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  collection,
+  orderBy,
+  query,
+  getDocs,
+  where,
+  writeBatch,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
 export const changeProfile = async (event) => {
   event.preventDefault();
@@ -29,12 +41,25 @@ export const changeProfile = async (event) => {
   })
     .then(() => {
       alert("프로필 수정 완료");
-      window.location.hash = "#fanLog";
     })
     .catch((error) => {
       alert("프로필 수정 실패");
       console.log("error:", error);
     });
+  const batch = writeBatch(dbService);
+  const q = query(
+    collection(dbService, "comments"),
+    where("creatorId", "==", authService.currentUser.uid)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    batch.update(doc.ref, {
+      nickname: newNickname,
+      profileImg: downloadUrl,
+    });
+  });
+  await batch.commit();
+  window.location.hash = "#fanLog";
 };
 
 export const onFileChange = (event) => {
