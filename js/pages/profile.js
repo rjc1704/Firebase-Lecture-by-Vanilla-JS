@@ -22,6 +22,7 @@ import {
 
 export const changeProfile = async (event) => {
   event.preventDefault();
+  URL.revokeObjectURL(objectUrl);
   document.getElementById("profileBtn").disabled = true;
   const imgRef = ref(
     storageService,
@@ -66,11 +67,13 @@ export const changeProfile = async (event) => {
 };
 
 var imgFile;
-
+var objectUrl;
 export const onFileChange = (event) => {
   // const theFile = event.target.files[0]; // file 객체
   imgFile = event.target.files[0];
-  document.getElementById("profileView").src = URL.createObjectURL(imgFile);
+  objectUrl = URL.createObjectURL(imgFile);
+  document.getElementById("profileView").src = objectUrl;
+
   // const reader = new FileReader();
   // reader.readAsDataURL(theFile); // file 객체를 브라우저가 읽을 수 있는 data URL로 읽음.
   // reader.onloadend = (finishedEvent) => {
