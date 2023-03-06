@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     handleLocation();
     const hash = window.location.hash;
     if (user) {
+      console.log("user:", user);
       // 로그인 상태이므로 항상 팬명록 화면으로 이동
       if (hash === "") {
         // 로그인 상태에서는 로그인 화면으로 되돌아갈 수 없게 설정
